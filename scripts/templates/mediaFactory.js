@@ -37,6 +37,7 @@ class Image {
     imageElement.setAttribute("src", imageMedia);
     imageElement.setAttribute("alt", title);
     imageElement.classList.add("media-img");
+    imageElement.classList.add("media-lightbox");
     return imageElement;
   }
 }
@@ -57,6 +58,7 @@ class Video {
 
     const videoDiv = document.createElement("video");
     videoDiv.classList.add("media-video");
+    videoDiv.classList.add("media-lightbox");
     const videoElement = document.createElement("source");
 
     videoDiv.setAttribute("controls", "");
