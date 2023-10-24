@@ -99,16 +99,18 @@ function nextMedia() {
 
 //Keyboard use
 
-lightbox.addEventListener("keydown", (key) => {
+document.addEventListener("keydown", (event) => {
   if (lightbox.style.display === "flex") {
-    if (key.code === "Escape") {
-      closeModal();
-    }
-    if (key.code === "ArrowRight") {
-      nextMedia();
-    }
-    if (key.code === "ArrowLeft") {
-      previousMedia();
+    switch (event.key) {
+      case "Escape":
+        closeModal();
+        break;
+      case "ArrowRight":
+        nextMedia();
+        break;
+      case "ArrowLeft":
+        previousMedia();
+        break;
     }
   }
 });
