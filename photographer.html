@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/photographer.css" rel="stylesheet" />
@@ -14,7 +14,9 @@
 
   <body class="body-photographer">
     <header>
-      <a href="index.html"><img src="assets/images/logo.png" class="logo" /></a>
+      <a href="index.html"
+        ><img src="assets/images/logo.png" alt="Fisheye Home page" class="logo"
+      /></a>
     </header>
     <main id="main">
       <section class="photograph-header">
@@ -30,20 +32,40 @@
             id="sort-button"
             aria-haspopup="listbox"
             aria-expanded="false"
+            role="button"
+            tabindex="0"
           >
             <span>Popularité</span>
-            <div id="sort-arrow" class="arrow-down"></div>
+            <div id="sort-arrow" class="arrow-down" aria-hidden="true"></div>
           </button>
           <ul id="sort-option-container" role="listbox" aria-label="Trier par">
             <li
-              class="sort-option display-none"
+              class="sort-option hidden-option"
               role="option"
               data-value="popularity"
+              aria-selected="true"
+              tabindex="-1"
             >
               Popularité
             </li>
-            <li class="sort-option" role="option" data-value="date">Date</li>
-            <li class="sort-option" role="option" data-value="title">Titre</li>
+            <li
+              class="sort-option"
+              role="option"
+              data-value="date"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              Date
+            </li>
+            <li
+              class="sort-option"
+              role="option"
+              data-value="title"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              Titre
+            </li>
           </ul>
         </div>
       </div>
@@ -61,6 +83,7 @@
         <a class="next">&#10095;</a>
         <svg
           id="close-lightbox"
+          aria-label="close"
           width="42"
           height="42"
           viewBox="0 0 42 42"
@@ -75,22 +98,44 @@
       </div>
     </div>
 
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog" aria-labelledby="contact-title">
       <div class="modal">
         <header class="modal-header">
-          <h2 class="modal-title">Contactez-moi</h2>
-          <img class="close-modal" src="assets/icons/close.svg" />
+          <h2 id="contact-title" class="modal-title">Contactez-moi</h2>
+          <img
+            class="close-modal"
+            src="assets/icons/close.svg"
+            aria-label="close-contact-form"
+          />
         </header>
         <form>
           <div>
-            <label for="first">Prénom</label>
-            <input class="contact-form" type="text" id="first" name="first" />
+            <label for="first-name">Prénom</label>
+            <input
+              class="contact-form"
+              type="text"
+              id="first"
+              name="first-name"
+              aria-labelledby="first-name"
+            />
 
-            <label for="last">Nom</label>
-            <input class="contact-form" type="text" id="last" name="last" />
+            <label for="last-name">Nom</label>
+            <input
+              class="contact-form"
+              type="text"
+              id="last"
+              name="last"
+              aria-labelledby="last-name"
+            />
 
-            <label for="email">Email</label>
-            <input class="contact-form" type="email" id="email" name="email" />
+            <label for="e-mail">Email</label>
+            <input
+              class="contact-form"
+              type="email"
+              id="email"
+              name="e-mail"
+              aria-labelledby="e-mail"
+            />
 
             <label for="message">Votre message</label>
             <input
@@ -98,9 +143,12 @@
               type="text"
               id="message"
               name="message"
+              aria-labelledby="your-message"
             />
           </div>
-          <button class="contact_button" id="send-contact">Envoyer</button>
+          <button class="contact_button" id="send-contact" aria-label="send">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>

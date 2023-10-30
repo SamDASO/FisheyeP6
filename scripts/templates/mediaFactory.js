@@ -35,6 +35,7 @@ class Image {
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
+    aLink.setAttribute("aria-label", "closeup view");
 
     const imageElement = document.createElement("img");
     imageElement.setAttribute("src", imageMedia);
@@ -63,6 +64,7 @@ class Video {
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
+    aLink.setAttribute("aria-label", "closeup view");
 
     const videoDiv = document.createElement("video");
     videoDiv.classList.add("media-video");

@@ -37,7 +37,11 @@ const sortOptionContainer = document.getElementById("sort-option-container");
 const sortOptions = document.querySelectorAll(".sort-option");
 const arrowDiv = document.getElementById("sort-arrow");
 
+//MEDIAS
+const sectionMedia = document.querySelector(".media");
+
 let isMenuOpen = false;
+let focusedOptionIndex = 0;
 
 ////DISPLYING MENU LIST
 
@@ -58,9 +62,12 @@ function menuToggle() {
     arrowDiv.classList.add("arrow-up");
     arrowDiv.classList.remove("arrow-down");
 
+    sortOptions[focusedOptionIndex].focus();
     isMenuOpen = true;
   }
 }
+
+///Accessibility
 
 sortOptions.forEach((option) => {
   option.addEventListener("click", function () {
@@ -69,7 +76,13 @@ sortOptions.forEach((option) => {
     menuToggle();
 
     sortOptions.forEach((item) => {
-      item.classList.toggle("display-none", item === this);
+      if (item === this) {
+        item.classList.add("hidden-option");
+        item.setAttribute("aria-selected", "true");
+      } else {
+        item.classList.remove("hidden-option");
+        item.setAttribute("aria-selected", "false");
+      }
     });
 
     sortButton.setAttribute("aria-expanded", "false");
@@ -161,6 +174,14 @@ function sortedByTitleMedia(photographer, allMedia) {
     });
 }
 
+// Keyboard accessibility
+
+const sortFunctions = {
+  popularity: sortedByPopularityMedia,
+  date: sortedByDateMedia,
+  title: sortedByTitleMedia,
+};
+
 ///////////////////Total Likes template and update
 
 function updateTotalLikes(photographer, media) {
@@ -218,9 +239,6 @@ async function init() {
 
   displayInfo(photographer);
 
-  //MEDIAS
-  const sectionMedia = document.querySelector(".media");
-
   ///Sorted medias
 
   const popularOption = document.querySelector(
@@ -255,6 +273,57 @@ async function init() {
     displayMediaUpdate(sortedByTitle, sectionMedia);
   });
 
+  //by keyboard
+
+  sortOptions.forEach((option) => {
+    option.addEventListener("keydown", function (event) {
+      if (event.key === "Tab" && !event.shiftKey) {
+        // If the user presses Tab, close the menu and focus on the button
+        event.preventDefault();
+        menuToggle();
+        sortButton.focus();
+      } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        // Handle arrow key focus and opening list
+        event.preventDefault();
+        const currentlyFocused = document.activeElement;
+        const focusedOptionIndex =
+          Array.from(sortOptions).indexOf(currentlyFocused);
+
+        if (event.key === "ArrowDown") {
+          const nextIndex = (focusedOptionIndex + 1) % sortOptions.length;
+          sortOptions[nextIndex].focus();
+        } else {
+          const prevIndex =
+            (focusedOptionIndex - 1 + sortOptions.length) % sortOptions.length;
+          sortOptions[prevIndex].focus();
+        }
+      } else if (event.key === "Enter" || event.key === " ") {
+        // Selection of the option
+        const selectedValue = option.getAttribute("data-value");
+        const sortFunction = sortFunctions[selectedValue];
+        if (sortFunction) {
+          //Update the text of the button
+          sortButton.querySelector("span").textContent = option.textContent;
+
+          //ARIA Attributes
+          sortOptions.forEach((item) => {
+            if (item === option) {
+              item.classList.add("hidden-option");
+              item.setAttribute("aria-selected", "true");
+            } else {
+              item.classList.remove("hidden-option");
+              item.setAttribute("aria-selected", "false");
+            }
+          });
+
+          sortButton.setAttribute("aria-expanded", "false");
+          displayMediaUpdate(sortFunction(photographer, media), sectionMedia);
+        }
+        menuToggle();
+        sortButton.focus();
+      }
+    });
+  });
   //Total likes
 
   updateTotalLikes(photographer, media);
