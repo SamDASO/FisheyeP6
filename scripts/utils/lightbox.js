@@ -28,13 +28,13 @@ function displayLightbox(index) {
   if (photographerMediaLinks[index]) {
     // Create an <li> element and append the selected media link
     const liElement = document.createElement("li");
+    // Find the title within media-description and add it to the div
+    const mediaDescription = photographerMediaLinks[index].nextElementSibling;
+    const title = mediaDescription.querySelector(".media-title");
+    title.setAttribute("aria-hidden", "true");
 
     liElement.innerHTML = photographerMediaLinks[index].outerHTML;
-
-    const mediaDescription = photographerMediaLinks[index].nextElementSibling;
-
-    // Find the title within media-description and add it to the div
-    const title = mediaDescription.querySelector(".media-title");
+    liElement.setAttribute("aria-label", title);
 
     liElement.appendChild(title.cloneNode(true));
     lightboxContainer.appendChild(liElement);

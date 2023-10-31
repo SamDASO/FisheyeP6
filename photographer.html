@@ -76,14 +76,14 @@
       </div>
     </main>
 
-    <div id="lightbox" role="dialog">
-      <a class="previous">&#10094;</a>
+    <div id="lightbox" role="dialog" aria-label="image closeup view">
+      <a class="previous" aria-label="previous image">&#10094;</a>
       <ul class="lightbox-display"></ul>
       <div class="last-commands-lightbox">
-        <a class="next">&#10095;</a>
+        <a class="next" aria-label="next image">&#10095;</a>
         <svg
           id="close-lightbox"
-          aria-label="close"
+          aria-label="close dialog"
           width="42"
           height="42"
           viewBox="0 0 42 42"
@@ -105,7 +105,7 @@
           <img
             class="close-modal"
             src="assets/icons/close.svg"
-            aria-label="close-contact-form"
+            aria-label="close contact form"
           />
         </header>
         <form>
@@ -114,7 +114,7 @@
             <input
               class="contact-form"
               type="text"
-              id="first"
+              id="first-name"
               name="first-name"
               aria-labelledby="first-name"
             />
@@ -123,18 +123,18 @@
             <input
               class="contact-form"
               type="text"
-              id="last"
+              id="last-name"
               name="last"
               aria-labelledby="last-name"
             />
 
-            <label for="e-mail">Email</label>
+            <label for="email">Email</label>
             <input
               class="contact-form"
               type="email"
               id="email"
-              name="e-mail"
-              aria-labelledby="e-mail"
+              name="email"
+              aria-labelledby="email"
             />
 
             <label for="message">Votre message</label>
@@ -143,7 +143,7 @@
               type="text"
               id="message"
               name="message"
-              aria-labelledby="your-message"
+              aria-labelledby="message"
             />
           </div>
           <button class="contact_button" id="send-contact" aria-label="send">

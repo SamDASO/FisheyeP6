@@ -50,8 +50,8 @@ const closeModalBtn = document.querySelector(".close-modal");
 const contactBtn = document.getElementById("contact-open");
 const sendBtn = document.getElementById("send-contact");
 
-const firstNameElement = document.getElementById("first");
-const lastNameElement = document.getElementById("last");
+const firstNameElement = document.getElementById("first-name");
+const lastNameElement = document.getElementById("last-name");
 const emailElement = document.getElementById("email");
 const messageElement = document.getElementById("message");
 
