@@ -50,8 +50,8 @@ const closeModalBtn = document.querySelector(".close-modal");
 const contactBtn = document.getElementById("contact-open");
 const sendBtn = document.getElementById("send-contact");
 
-const firstNameElement = document.getElementById("first");
-const lastNameElement = document.getElementById("last");
+const firstNameElement = document.getElementById("first-name");
+const lastNameElement = document.getElementById("last-name");
 const emailElement = document.getElementById("email");
 const messageElement = document.getElementById("message");
 
@@ -60,9 +60,13 @@ const messageElement = document.getElementById("message");
 function displayModal() {
   modal.style.display = "flex";
   bodyPhotographer.classList.add("overflow-hidden");
+
+  if (firstNameElement) {
+    firstNameElement.focus();
+  }
 }
 
-function closeModal() {
+function closeModalForm() {
   modal.style.display = "none";
   bodyPhotographer.classList.remove("overflow-hidden");
 }
@@ -71,7 +75,8 @@ function closeModal() {
 contactBtn.addEventListener("click", displayModal);
 
 //Close modal
-closeModalBtn.addEventListener("click", closeModal);
+closeModalBtn.addEventListener("click", closeModalForm);
+modal.addEventListener("keydown", closeWithKeyboard);
 
 //Submit form
 sendBtn.addEventListener("click", submitForm);
@@ -89,7 +94,7 @@ function submitForm(event) {
   if (isFillingForm > 0) {
     return false;
   } else {
-    closeModal();
+    closeModalForm();
     alert("Your message has been sent");
     return true;
   }
@@ -104,3 +109,41 @@ function fillingForm(input, label) {
     return 0;
   }
 }
+
+/////Keyboard accessibility
+
+function closeWithKeyboard(event) {
+  if (event.key === "Escape") {
+    closeModalForm();
+  }
+}
+
+modal.addEventListener("keydown", (event) => {
+  if (event.key === "Tab") {
+    // Get all focusable elements within the modal
+    const focusableElements = modal.querySelectorAll("input, button");
+
+    if (focusableElements.length === 0) return;
+
+    // Find the index of the currently focused element
+    const focusedIndex = Array.from(focusableElements).indexOf(
+      document.activeElement
+    );
+
+    if (event.shiftKey) {
+      // Shift + Tab: Move focus to the previous element
+      if (focusedIndex === 0) {
+        focusableElements[focusableElements.length - 1].focus();
+        event.preventDefault();
+      }
+    } else {
+      // Tab: Move focus to the next element
+      if (focusedIndex === focusableElements.length - 1) {
+        focusableElements[0].focus();
+        event.preventDefault();
+      }
+    }
+  } else if (event.key === "Escape") {
+    closeModalForm();
+  }
+});

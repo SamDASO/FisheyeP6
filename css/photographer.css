@@ -52,6 +52,12 @@
   cursor: pointer;
 }
 
+#contact-open:focus,
+#contact-open:hover {
+  background-color: #db8876;
+  color: black;
+}
+
 /*CSS SORTED LIST*/
 
 .sorted-list {
@@ -90,6 +96,11 @@
   flex-grow: 1;
 }
 
+#sort-option-container:focus {
+  background-color: #db8876;
+  color: black;
+}
+
 .sort-option {
   color: white;
   border-top: white 2px solid;
@@ -98,8 +109,14 @@
   cursor: pointer;
 }
 
-.display-none {
-  display: none;
+li .sort-option:focus {
+  background-color: #db8876;
+  color: black;
+}
+
+.hidden-option {
+  position: absolute;
+  left: -9999px;
 }
 
 #sort-button {

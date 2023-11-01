@@ -35,6 +35,8 @@ class Image {
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
+    aLink.setAttribute("aria-label", `${title}closeup view`);
+    aLink.setAttribute("tabindex", "0");
 
     const imageElement = document.createElement("img");
     imageElement.setAttribute("src", imageMedia);
@@ -57,12 +59,14 @@ class Video {
   }
 
   getMediaCardDom() {
-    const { video } = this.#media;
+    const { video, title } = this.#media;
     const photographerName = this.#photographer.name.split(" ")[0];
     const videoMedia = `../../assets/medias/${photographerName}/${video}`;
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
+    aLink.setAttribute("aria-label", `${title}closeup view`);
+    aLink.setAttribute("tabindex", "0");
 
     const videoDiv = document.createElement("video");
     videoDiv.classList.add("media-video");

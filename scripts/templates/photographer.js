@@ -18,10 +18,7 @@ export function photographerTemplate(photographers) {
       "href",
       "/photographer.html?id=" + `${id}`
     );
-    linkPagePhotographer.setAttribute(
-      "title",
-      "Voir le profil de " + `${name}`
-    );
+    linkPagePhotographer.setAttribute("title", name);
 
     const img = document.createElement("img");
     img.setAttribute("src", picture);
@@ -100,14 +97,14 @@ export function photographInfoTemplate(dataPhotographers) {
 }
 
 export function photographPicture(dataPhotographers) {
-  const { portrait } = dataPhotographers;
+  const { portrait, name } = dataPhotographers;
   const picture = `assets/photographers/${portrait}`;
 
   function getUserPicture() {
     const container = document.createElement("div");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
-    img.setAttribute("alt", "");
+    img.setAttribute("alt", name);
 
     container.appendChild(img);
 
@@ -133,6 +130,7 @@ export function mediasTemplate(photographer, media) {
   const titleElement = document.createElement("p");
   titleElement.innerText = title;
   titleElement.classList.add("media-title");
+  titleElement.setAttribute("aria-hidden", "true");
 
   const divLikes = document.createElement("div");
   divLikes.classList.add("likes-container");
@@ -155,7 +153,7 @@ export function mediasTemplate(photographer, media) {
     "image/svg+xml"
   );
   const svgElement = likesIconParsed.documentElement;
-  svgElement.setAttribute("alt", "j'aimes");
+  svgElement.setAttribute("aria-label", "likes");
   svgElement.classList.add("likes-icon");
 
   article.appendChild(mediaType);
