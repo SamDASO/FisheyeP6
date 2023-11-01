@@ -26,18 +26,24 @@ function displayLightbox(index) {
   lightboxContainer.innerHTML = "";
 
   if (photographerMediaLinks[index]) {
-    // Create an <li> element and append the selected media link
+    // Create an <li> element with the media
     const liElement = document.createElement("li");
     // Find the title within media-description and add it to the div
     const mediaDescription = photographerMediaLinks[index].nextElementSibling;
     const title = mediaDescription.querySelector(".media-title");
     title.setAttribute("aria-hidden", "true");
+    lightboxContainer.setAttribute("aria-describedby", title);
 
     liElement.innerHTML = photographerMediaLinks[index].outerHTML;
     liElement.setAttribute("aria-label", title);
+    liElement.setAttribute("tabindex", "1");
 
     liElement.appendChild(title.cloneNode(true));
     lightboxContainer.appendChild(liElement);
+
+    photographerMediaLinks.forEach((mediaLink) => {
+      mediaLink.removeAttribute("tabindex");
+    });
 
     currentIndex = index;
   }
@@ -77,6 +83,16 @@ function closeModal() {
   lightbox.setAttribute("aria-hidden", "true");
   document.body.setAttribute("aria-hidden", "false");
   document.body.classList.remove("overflow-hidden");
+
+  photographerMediaLinks.forEach((mediaLink) => {
+    mediaLink.setAttribute("tabindex", "0");
+  });
+
+  // Remove tabindex attributes from focusable elements within the lightbox
+  const focusableElements = lightboxContainer.querySelectorAll("*[tabindex]");
+  focusableElements.forEach((element) => {
+    element.tabIndex = -1;
+  });
 }
 
 // Function to navigate to the previous media

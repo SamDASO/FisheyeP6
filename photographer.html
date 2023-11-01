@@ -76,13 +76,18 @@
       </div>
     </main>
 
-    <div id="lightbox" role="dialog" aria-label="image closeup view">
-      <a class="previous" aria-label="previous image">&#10094;</a>
+    <div
+      id="lightbox"
+      role="dialog"
+      aria-label="image closeup view. Use the keyboard arrows and the escape key to go through the medias."
+    >
+      <a class="previous" aria-label="previous image" tabindex="1">&#10094;</a>
       <ul class="lightbox-display"></ul>
       <div class="last-commands-lightbox">
-        <a class="next" aria-label="next image">&#10095;</a>
+        <a class="next" aria-label="next image" tabindex="1">&#10095;</a>
         <svg
           id="close-lightbox"
+          tabindex="1"
           aria-label="close dialog"
           width="42"
           height="42"
@@ -105,6 +110,7 @@
           <img
             class="close-modal"
             src="assets/icons/close.svg"
+            alt="close"
             aria-label="close contact form"
           />
         </header>
