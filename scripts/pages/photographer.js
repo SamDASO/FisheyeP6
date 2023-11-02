@@ -107,7 +107,7 @@ function sortedByPopularityMedia(photographer, allMedia) {
     .sort((a, b) => b.likes - a.likes)
     .map((media) => {
       const mediaModel = mediasTemplate(photographer, media);
-      const likeButton = mediaModel.querySelector(".likes-icon");
+      const likeButton = mediaModel.querySelector(".likes-container");
       const likeCountElement = mediaModel.querySelector(".likes");
 
       likeButton.addEventListener("click", () => {
@@ -131,7 +131,7 @@ function sortedByDateMedia(photographer, allMedia) {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .map((media) => {
       const mediaModel = mediasTemplate(photographer, media);
-      const likeButton = mediaModel.querySelector(".likes-icon");
+      const likeButton = mediaModel.querySelector(".likes-container");
       const likeCountElement = mediaModel.querySelector(".likes");
 
       likeButton.addEventListener("click", () => {
@@ -155,7 +155,7 @@ function sortedByTitleMedia(photographer, allMedia) {
     .sort((a, b) => a.title.localeCompare(b.title))
     .map((media) => {
       const mediaModel = mediasTemplate(photographer, media);
-      const likeButton = mediaModel.querySelector(".likes-icon");
+      const likeButton = mediaModel.querySelector(".likes-container");
       const likeCountElement = mediaModel.querySelector(".likes");
 
       likeButton.addEventListener("click", () => {

@@ -132,8 +132,8 @@ export function mediasTemplate(photographer, media) {
   titleElement.classList.add("media-title");
   titleElement.setAttribute("aria-hidden", "true");
 
-  const divLikes = document.createElement("div");
-  divLikes.classList.add("likes-container");
+  const btnLikes = document.createElement("button");
+  btnLikes.classList.add("likes-container");
 
   const likesElement = document.createElement("p");
   likesElement.innerText = likes;
@@ -159,9 +159,9 @@ export function mediasTemplate(photographer, media) {
   article.appendChild(mediaType);
   article.appendChild(divDescription);
   divDescription.appendChild(titleElement);
-  divDescription.appendChild(divLikes);
-  divLikes.appendChild(likesElement);
-  divLikes.appendChild(svgElement);
+  divDescription.appendChild(btnLikes);
+  btnLikes.appendChild(likesElement);
+  btnLikes.appendChild(svgElement);
 
   return article;
 }

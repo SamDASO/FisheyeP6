@@ -205,6 +205,9 @@ li .sort-option:focus {
   justify-content: space-between;
   align-items: center;
   gap: 5px;
+  appearance: none;
+  background-color: transparent;
+  border: none;
 }
 
 .likes-icon {

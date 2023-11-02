@@ -35,7 +35,7 @@ class Image {
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
-    aLink.setAttribute("aria-label", `${title}closeup view`);
+    aLink.setAttribute("aria-label", `${title} closeup view`);
     aLink.setAttribute("tabindex", "0");
 
     const imageElement = document.createElement("img");
@@ -65,7 +65,7 @@ class Video {
 
     const aLink = document.createElement("a");
     aLink.classList.add("media-link");
-    aLink.setAttribute("aria-label", `${title}closeup view`);
+    aLink.setAttribute("aria-label", `${title} closeup view`);
     aLink.setAttribute("tabindex", "0");
 
     const videoDiv = document.createElement("video");
