@@ -62,7 +62,6 @@
 
 .sorted-list {
   display: flex;
-  align-items: center;
   margin: 50px 120px;
   gap: 25px;
 }
@@ -84,27 +83,28 @@
 
 #sort-option-container {
   display: none;
-  border-radius: 0 0 5px 5px;
+  border-radius: 5px;
   background: #901c1c;
   padding: 0;
   text-align: left;
   color: white;
   gap: 30px;
-  margin: -4px 0 0;
+  margin: 0;
   width: 100%;
   box-sizing: content-box;
   flex-grow: 1;
 }
 
-#sort-option-container:focus {
-  background-color: #db8876;
-  color: black;
-}
-
-.sort-option {
-  color: white;
+.sort-option:not(:first-child) {
   border-top: white 2px solid;
   margin: 14px 20px;
+}
+
+.sort-option:first-child {
+  margin: 0 20px;
+}
+.sort-option {
+  color: white;
   padding-top: 14px;
   cursor: pointer;
 }
@@ -112,11 +112,6 @@
 li .sort-option:focus {
   background-color: #db8876;
   color: black;
-}
-
-.hidden-option {
-  position: absolute;
-  left: -9999px;
 }
 
 #sort-button {
@@ -128,14 +123,13 @@ li .sort-option:focus {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  gap: 18px;
   width: 100%;
   flex-grow: 1;
   font-family: "DM Sans", sans-serif;
 }
 
 .arrow-down {
-  margin-left: auto;
+  margin-left: 18px;
   border: solid white;
   border-width: 0 3px 3px 0;
   display: inline-block;
@@ -146,7 +140,7 @@ li .sort-option:focus {
 }
 
 .arrow-up {
-  margin-left: auto;
+  margin-left: 18px;
   border: solid white;
   border-width: 3px 0 0 3px;
   display: inline-block;
@@ -207,11 +201,9 @@ li .sort-option:focus {
   gap: 5px;
   appearance: none;
   background-color: transparent;
+  color: #901c1c;
+  font-size: 24px;
   border: none;
-}
-
-.likes-icon {
-  margin-bottom: -3px;
 }
 
 .liked path {

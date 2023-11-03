@@ -35,7 +35,6 @@ function displayInfo(photographer) {
 const sortButton = document.getElementById("sort-button");
 const sortOptionContainer = document.getElementById("sort-option-container");
 const sortOptions = document.querySelectorAll(".sort-option");
-const arrowDiv = document.getElementById("sort-arrow");
 
 //MEDIAS
 const sectionMedia = document.querySelector(".media");
@@ -51,16 +50,12 @@ function menuToggle() {
   if (isMenuOpen) {
     sortOptionContainer.style.display = "none";
     sortButton.setAttribute("aria-expanded", "false");
-    sortButton.style.padding = "20px 15px";
-    arrowDiv.classList.add("arrow-down");
-    arrowDiv.classList.remove("arrow-up");
+    sortButton.style.display = "flex";
     isMenuOpen = false;
   } else {
     sortOptionContainer.style.display = "block";
-    sortButton.style.padding = "20px 15px 0";
     sortButton.setAttribute("aria-expanded", "true");
-    arrowDiv.classList.add("arrow-up");
-    arrowDiv.classList.remove("arrow-down");
+    sortButton.style.display = "none";
 
     sortOptions[focusedOptionIndex].focus();
     isMenuOpen = true;
@@ -68,6 +63,10 @@ function menuToggle() {
 }
 
 ///Accessibility
+
+let defaultOption = document.querySelector(
+  ".sort-option[data-value='popularity']"
+);
 
 sortOptions.forEach((option) => {
   option.addEventListener("click", function () {
@@ -77,13 +76,38 @@ sortOptions.forEach((option) => {
 
     sortOptions.forEach((item) => {
       if (item === this) {
-        item.classList.add("hidden-option");
+        const arrowUp = document.createElement("div");
+        arrowUp.classList.add("arrow-up");
+        arrowUp.setAttribute("aria-hidden", "true");
         item.setAttribute("aria-selected", "true");
+
+        if (item !== defaultOption) {
+          // Move the selected item to the top of the list
+          sortOptionContainer.insertBefore(
+            item,
+            sortOptionContainer.firstElementChild
+          );
+          item.appendChild(arrowUp);
+
+          //Remove the arrow from the default option
+          const arrowUpElement = defaultOption.querySelector(".arrow-up");
+          defaultOption.removeChild(arrowUpElement);
+        }
       } else {
-        item.classList.remove("hidden-option");
+        const arrowUpElement = item.querySelector(".arrow-up");
+        if (arrowUpElement) {
+          item.removeChild(arrowUpElement);
+        }
         item.setAttribute("aria-selected", "false");
       }
     });
+    // If the default option is not selected, remove its arrow
+    if (defaultOption !== this) {
+      const arrowUpElement = defaultOption.querySelector(".arrow-up");
+      if (arrowUpElement) {
+        defaultOption.removeChild(arrowUpElement);
+      }
+    }
 
     sortButton.setAttribute("aria-expanded", "false");
   });
