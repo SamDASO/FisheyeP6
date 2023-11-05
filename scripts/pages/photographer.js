@@ -64,10 +64,6 @@ function menuToggle() {
 
 ///Accessibility
 
-let defaultOption = document.querySelector(
-  ".sort-option[data-value='popularity']"
-);
-
 sortOptions.forEach((option) => {
   option.addEventListener("click", function () {
     sortButton.querySelector("span").textContent = this.textContent;
@@ -75,39 +71,34 @@ sortOptions.forEach((option) => {
     menuToggle();
 
     sortOptions.forEach((item) => {
-      if (item === this) {
+      const selectedOption = this;
+      if (item === selectedOption) {
         const arrowUp = document.createElement("div");
         arrowUp.classList.add("arrow-up");
         arrowUp.setAttribute("aria-hidden", "true");
         item.setAttribute("aria-selected", "true");
 
-        if (item !== defaultOption) {
-          // Move the selected item to the top of the list
-          sortOptionContainer.insertBefore(
-            item,
-            sortOptionContainer.firstElementChild
-          );
-          item.appendChild(arrowUp);
-
-          //Remove the arrow from the default option
-          const arrowUpElement = defaultOption.querySelector(".arrow-up");
-          defaultOption.removeChild(arrowUpElement);
-        }
-      } else {
+        // Move the selected item to the top of the list
+        sortOptionContainer.insertBefore(
+          item,
+          sortOptionContainer.firstElementChild
+        );
         const arrowUpElement = item.querySelector(".arrow-up");
-        if (arrowUpElement) {
-          item.removeChild(arrowUpElement);
+        if (!arrowUpElement) {
+          item.appendChild(arrowUp);
         }
-        item.setAttribute("aria-selected", "false");
       }
+
+      sortOptions.forEach((item) => {
+        if (item !== selectedOption) {
+          const arrowUpElement = item.querySelector(".arrow-up");
+          if (arrowUpElement) {
+            item.removeChild(arrowUpElement);
+          }
+          item.setAttribute("aria-selected", "false");
+        }
+      });
     });
-    // If the default option is not selected, remove its arrow
-    if (defaultOption !== this) {
-      const arrowUpElement = defaultOption.querySelector(".arrow-up");
-      if (arrowUpElement) {
-        defaultOption.removeChild(arrowUpElement);
-      }
-    }
 
     sortButton.setAttribute("aria-expanded", "false");
   });
