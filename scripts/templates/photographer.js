@@ -22,7 +22,7 @@ export function photographerTemplate(photographers) {
 
     const img = document.createElement("img");
     img.setAttribute("src", picture);
-    img.setAttribute("alt", "");
+    img.setAttribute("alt", `profile of ${name}`);
     img.className = "photograph-photo";
 
     const h2 = document.createElement("h2");
