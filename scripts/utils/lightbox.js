@@ -31,12 +31,13 @@ function displayLightbox(index) {
     // Find the title within media-description and add it to the div
     const mediaDescription = photographerMediaLinks[index].nextElementSibling;
     const title = mediaDescription.querySelector(".media-title");
-    title.setAttribute("aria-hidden", "true");
-    lightboxContainer.setAttribute("aria-describedby", title);
+    title.setAttribute("aria-hidden", "false");
+
+    const labelText = title.textContent;
 
     liElement.innerHTML = photographerMediaLinks[index].outerHTML;
-    liElement.setAttribute("aria-label", title);
-    liElement.setAttribute("tabindex", "1");
+    liElement.setAttribute("tabindex", "0");
+    liElement.setAttribute("aria-label", labelText);
 
     liElement.appendChild(title.cloneNode(true));
     lightboxContainer.appendChild(liElement);
@@ -46,6 +47,11 @@ function displayLightbox(index) {
     });
 
     currentIndex = index;
+  }
+  const firstInteractiveElement =
+    lightboxContainer.querySelector('[tabindex="0"]');
+  if (firstInteractiveElement) {
+    firstInteractiveElement.focus();
   }
 }
 
@@ -61,6 +67,11 @@ const observer = new MutationObserver((mutationsList) => {
       photographerMediaLinks.forEach((mediaLink, index) => {
         mediaLink.addEventListener("click", () => {
           displayLightbox(index);
+        });
+        mediaLink.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            displayLightbox(index);
+          }
         });
       });
     }
@@ -115,7 +126,7 @@ function nextMedia() {
 
 //Keyboard use
 
-document.addEventListener("keydown", (event) => {
+lightbox.addEventListener("keydown", (event) => {
   if (lightbox.style.display === "flex") {
     switch (event.key) {
       case "Escape":
@@ -128,5 +139,17 @@ document.addEventListener("keydown", (event) => {
         previousMedia();
         break;
     }
+  }
+});
+
+previousButton.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    previousMedia();
+  }
+});
+
+nextButton.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    nextMedia();
   }
 });

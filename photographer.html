@@ -32,8 +32,8 @@
             id="sort-button"
             aria-haspopup="listbox"
             aria-expanded="false"
+            aria-controls="sort-option-container"
             role="button"
-            tabindex="0"
           >
             <span>Popularité</span>
             <div id="sort-arrow" class="arrow-down" aria-hidden="true"></div>
@@ -44,7 +44,7 @@
               role="option"
               data-value="popularity"
               aria-selected="true"
-              tabindex="-1"
+              tabindex="0"
             >
               Popularité
               <div class="arrow-up" aria-hidden="true"></div>
@@ -54,7 +54,6 @@
               role="option"
               data-value="date"
               aria-selected="false"
-              tabindex="-1"
             >
               Date
             </li>
@@ -63,7 +62,6 @@
               role="option"
               data-value="title"
               aria-selected="false"
-              tabindex="-1"
             >
               Titre
             </li>
@@ -82,10 +80,10 @@
       role="dialog"
       aria-label="image closeup view. Use the keyboard arrows and the escape key to go through the medias."
     >
-      <a class="previous" aria-label="previous image" tabindex="1">&#10094;</a>
+      <a class="previous" aria-label="previous image" tabindex="0">&#10094;</a>
       <ul class="lightbox-display"></ul>
       <div class="last-commands-lightbox">
-        <a class="next" aria-label="next image" tabindex="1">&#10095;</a>
+        <a class="next" aria-label="next image" tabindex="0">&#10095;</a>
         <svg
           id="close-lightbox"
           tabindex="1"
