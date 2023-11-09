@@ -28,6 +28,7 @@ export function photographerTemplate(photographers) {
     const h2 = document.createElement("h2");
     h2.textContent = photographers.name;
     h2.className = "photograph-name";
+    h2.setAttribute("aria-hidden", true);
 
     const location = document.createElement("p");
     location.textContent = `${photographers.city}, ${photographers.country}`;
