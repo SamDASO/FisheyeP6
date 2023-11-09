@@ -76,6 +76,8 @@ export function photographInfoTemplate(dataPhotographers) {
 
     h1.innerText = name;
     h1.className = "photograph-name";
+    h1.setAttribute("aria-hidden", "false");
+    h1.setAttribute("tabindex", "0");
 
     location.textContent = `${dataPhotographers.city}, ${dataPhotographers.country}`;
     location.className = "photograph-location";
